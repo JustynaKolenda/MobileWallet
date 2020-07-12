@@ -1,16 +1,16 @@
 import React from "react";
 import { View, FlatList, Animated, Image, Text } from "react-native";
-import { GetCard } from "./conectors";
-import { CardsType } from "./CardTypes";
+import { GetCard } from "../conectors";
+import { CardsType } from "../Card/CardTypes";
 import { ImageCard, AnimatedView } from "./WalletStyles";
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
-interface WalletS {
+interface WalletSlaiderS {
     cards : Array<CardsType>,
 }
 
-export class Wallet extends React.Component <any, WalletS> {
+export class WalletSlaider extends React.Component <any, WalletSlaiderS> {
    constructor(props: any){
        super(props);
        this.state = {
@@ -37,6 +37,7 @@ export class Wallet extends React.Component <any, WalletS> {
     render(){
         return (
         <AnimatedFlatList
+            style={{marginTop: 20}}
             scrollEventThrottle={16}
             bounces={false}
             data={this.state.cards}
@@ -47,4 +48,4 @@ export class Wallet extends React.Component <any, WalletS> {
     };
 };
 
-export default Wallet;
+export default WalletSlaider;

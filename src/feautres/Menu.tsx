@@ -1,30 +1,52 @@
 
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
   View,
-  Button
+  Button,
+  Text
 } from 'react-native';
+import { Container, Heder, AddValue, AddValueButtonTitle, ValueInput, ListWraper, ScrolList} from './MenuStyle';
+import ListValue from './ListValue';
 
+const Menu = () => {
+  const [ values, setValue ] = useState(['valu1', 'other value', 'next value']);
+  const [ currentValu, setCurrentValue] = useState('')
 
-declare const global: {HermesInternal: null | {}};
+  function onAddValue() {
+    if (currentValu.length < 3) {
+      return;
+    }
+    setCurrentValue('');
+    setValue([...values, currentValu]);
+  }
 
-const Menu = ({navigation}:any) => {
   return (
-    <>
-      <SafeAreaView>
-        <ScrollView>
-           <View>
-            <Button title="Go to Wallet" onPress={() => navigation.navigate('Wallet')} />
-           </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
+    <SafeAreaView>
+      <Container>
+        <Heder>
+            <ValueInput 
+              placeholder={'Nowy paragon'} 
+              value={currentValu} 
+              onChangeText={setCurrentValue}
+            />
+            <AddValue onPress={onAddValue}>
+                <AddValueButtonTitle>{'Add'}</AddValueButtonTitle>
+            </AddValue>
+        </Heder>
+      <ListWraper>
+        <ScrolList 
+          data={values}
+          keyExtractor= {(item,index) => index.toString()}
+          renderItem={({value}:any) => <ListValue value={value}/>}
+        />
+      </ListWraper>
+      </Container>
+    </SafeAreaView>
   );
 };
-
 
 
 export default Menu;

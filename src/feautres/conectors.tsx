@@ -1,4 +1,4 @@
-import { CARD } from "./CardData";
+import { CARD } from "./Card/CardData";
 
 export function GetCard() {
     return CARD
